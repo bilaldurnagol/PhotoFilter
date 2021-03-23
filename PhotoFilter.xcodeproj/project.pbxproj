@@ -39,9 +39,9 @@
 		B56AF12225F2AD0B004D1B62 /* PhotoLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AF12125F2AD0B004D1B62 /* PhotoLibraryCollectionViewCell.swift */; };
 		B5A4688C260A1BDF00A0D62D /* screenshot_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A46887260A1BDE00A0D62D /* screenshot_2.png */; };
 		B5A4688D260A1BDF00A0D62D /* screenshot_3.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A46888260A1BDE00A0D62D /* screenshot_3.png */; };
-		B5A4688E260A1BDF00A0D62D /* screenshot_4.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A46889260A1BDE00A0D62D /* screenshot_4.png */; };
 		B5A4688F260A1BDF00A0D62D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A4688A260A1BDF00A0D62D /* logo.png */; };
 		B5A46890260A1BDF00A0D62D /* screenshot_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A4688B260A1BDF00A0D62D /* screenshot_1.png */; };
+		B5A46893260A1D8500A0D62D /* screenshot_4.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A46892260A1D8500A0D62D /* screenshot_4.png */; };
 		B5AEDD6225F62D3600FB4567 /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEDD6125F62D3600FB4567 /* FilterVC.swift */; };
 		B5AEDD6925F6512E00FB4567 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEDD6825F6512E00FB4567 /* RangeSlider.swift */; };
 		B5CEB36925F4D50100A522C1 /* EditsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEB36825F4D50100A522C1 /* EditsVC.swift */; };
@@ -84,9 +84,9 @@
 		B56AF12125F2AD0B004D1B62 /* PhotoLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		B5A46887260A1BDE00A0D62D /* screenshot_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_2.png; sourceTree = "<group>"; };
 		B5A46888260A1BDE00A0D62D /* screenshot_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_3.png; sourceTree = "<group>"; };
-		B5A46889260A1BDE00A0D62D /* screenshot_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_4.png; sourceTree = "<group>"; };
 		B5A4688A260A1BDF00A0D62D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		B5A4688B260A1BDF00A0D62D /* screenshot_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_1.png; sourceTree = "<group>"; };
+		B5A46892260A1D8500A0D62D /* screenshot_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_4.png; sourceTree = "<group>"; };
 		B5AEDD6125F62D3600FB4567 /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
 		B5AEDD6825F6512E00FB4567 /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		B5CEB36825F4D50100A522C1 /* EditsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditsVC.swift; sourceTree = "<group>"; };
@@ -251,10 +251,10 @@
 			isa = PBXGroup;
 			children = (
 				B5A4688A260A1BDF00A0D62D /* logo.png */,
+				B5A46892260A1D8500A0D62D /* screenshot_4.png */,
 				B5A4688B260A1BDF00A0D62D /* screenshot_1.png */,
 				B5A46887260A1BDE00A0D62D /* screenshot_2.png */,
 				B5A46888260A1BDE00A0D62D /* screenshot_3.png */,
-				B5A46889260A1BDE00A0D62D /* screenshot_4.png */,
 			);
 			path = githubImages;
 			sourceTree = "<group>";
@@ -322,7 +322,6 @@
 				B56AF10C25F29DFB004D1B62 /* Lato-Bold.ttf in Resources */,
 				B56AF10E25F29DFB004D1B62 /* Lato-Thin.ttf in Resources */,
 				B5A4688D260A1BDF00A0D62D /* screenshot_3.png in Resources */,
-				B5A4688E260A1BDF00A0D62D /* screenshot_4.png in Resources */,
 				B5A4688F260A1BDF00A0D62D /* logo.png in Resources */,
 				B56AF0D325F297A4004D1B62 /* Assets.xcassets in Resources */,
 				B56AF11225F29DFB004D1B62 /* Lato-BlackItalic.ttf in Resources */,
@@ -335,6 +334,7 @@
 				B56AF11325F29DFB004D1B62 /* Lato-Italic.ttf in Resources */,
 				B56AF10B25F29DFB004D1B62 /* Lato-BoldItalic.ttf in Resources */,
 				B5A4688C260A1BDF00A0D62D /* screenshot_2.png in Resources */,
+				B5A46893260A1D8500A0D62D /* screenshot_4.png in Resources */,
 				B56AF11425F29DFB004D1B62 /* Lato-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
