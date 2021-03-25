@@ -163,7 +163,14 @@ class FilterVC: UIViewController {
     
     @objc private func didTapSave() {
         //save to filtered photo
-        print("save")
+        
+        let vc = EditsVC()
+        var value = vc.selectedImage.value
+        value.append(imageView.image!)
+        vc.selectedImage.accept(value)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: false)
     }
     
     @objc private func didTapToolbarButton(_ sender: UIButton) {
