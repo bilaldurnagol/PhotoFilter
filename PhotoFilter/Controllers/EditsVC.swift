@@ -24,7 +24,7 @@ class EditsVC: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -88,11 +88,6 @@ class EditsVC: UIViewController {
                 strongSelf.present(nav ,animated: true)
             }
         }).disposed(by: disposeBag)
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
- 
         
     }
     override func viewDidLayoutSubviews() {

@@ -23,7 +23,7 @@ class FilterVC: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -57,7 +57,7 @@ class FilterVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navBar()
-        deleteToolbar()
+        bottomToolbar()
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(controlSlider)
@@ -121,7 +121,7 @@ class FilterVC: UIViewController {
     }
     
     //delete toolbar
-    private func deleteToolbar() {
+    private func bottomToolbar() {
         var barButtonArray = [UIBarButtonItem]()
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         barButtonArray.append(spacer)

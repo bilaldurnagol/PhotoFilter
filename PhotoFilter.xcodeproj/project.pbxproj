@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		794355DF41D44B657054EE3B /* Pods_PhotoFilter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D5C708BBFDF0241F6CE1D6 /* Pods_PhotoFilter.framework */; };
+		B555D7F6260C576600FA5060 /* PresetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555D7F5260C576600FA5060 /* PresetsVC.swift */; };
+		B555D7F9260C5DB100FA5060 /* PresetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555D7F8260C5DB100FA5060 /* PresetsCollectionViewCell.swift */; };
+		B555D7FF260C69BF00FA5060 /* PresetsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555D7FE260C69BF00FA5060 /* PresetsService.swift */; };
+		B555D804260C6A5800FA5060 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555D803260C6A5800FA5060 /* Presets.swift */; };
+		B555D808260C804400FA5060 /* screenshot_5.png in Resources */ = {isa = PBXBuildFile; fileRef = B555D807260C804400FA5060 /* screenshot_5.png */; };
 		B55786DD2603807A00A0B60E /* CropCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55786DC2603807A00A0B60E /* CropCollectionViewCell.swift */; };
 		B55786E02603827E00A0B60E /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55786DF2603827E00A0B60E /* Crop.swift */; };
 		B56313CB25FF97E6004FF718 /* CropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56313CA25FF97E6004FF718 /* CropVC.swift */; };
@@ -51,6 +56,11 @@
 /* Begin PBXFileReference section */
 		083967FDFD8BC9960B07CBE3 /* Pods-PhotoFilter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoFilter.release.xcconfig"; path = "Target Support Files/Pods-PhotoFilter/Pods-PhotoFilter.release.xcconfig"; sourceTree = "<group>"; };
 		29D5C708BBFDF0241F6CE1D6 /* Pods_PhotoFilter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoFilter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B555D7F5260C576600FA5060 /* PresetsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsVC.swift; sourceTree = "<group>"; };
+		B555D7F8260C5DB100FA5060 /* PresetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsCollectionViewCell.swift; sourceTree = "<group>"; };
+		B555D7FE260C69BF00FA5060 /* PresetsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsService.swift; sourceTree = "<group>"; };
+		B555D803260C6A5800FA5060 /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
+		B555D807260C804400FA5060 /* screenshot_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_5.png; sourceTree = "<group>"; };
 		B55786DC2603807A00A0B60E /* CropCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropCollectionViewCell.swift; sourceTree = "<group>"; };
 		B55786DF2603827E00A0B60E /* Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
 		B56313CA25FF97E6004FF718 /* CropVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropVC.swift; sourceTree = "<group>"; };
@@ -160,6 +170,7 @@
 			children = (
 				B567199825F7706B003C84FA /* Filter.swift */,
 				B55786DF2603827E00A0B60E /* Crop.swift */,
+				B555D803260C6A5800FA5060 /* Presets.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,6 +193,7 @@
 				B56313CA25FF97E6004FF718 /* CropVC.swift */,
 				B5CEB36825F4D50100A522C1 /* EditsVC.swift */,
 				B5AEDD6125F62D3600FB4567 /* FilterVC.swift */,
+				B555D7F5260C576600FA5060 /* PresetsVC.swift */,
 				B56AF0EF25F29BE3004D1B62 /* PhotoLibraryVC.swift */,
 				B56AF0F825F29CFD004D1B62 /* OnboardingVC.swift */,
 			);
@@ -199,6 +211,7 @@
 				B5AEDD6825F6512E00FB4567 /* RangeSlider.swift */,
 				B567199525F76F9F003C84FA /* FiltersService.swift */,
 				B56AA6F725F93945006A2B8D /* CropShapeLayer.swift */,
+				B555D7FE260C69BF00FA5060 /* PresetsService.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -243,6 +256,7 @@
 				B56AF12125F2AD0B004D1B62 /* PhotoLibraryCollectionViewCell.swift */,
 				B5CEB36B25F4FBF200A522C1 /* EditsCollectionViewCell.swift */,
 				B55786DC2603807A00A0B60E /* CropCollectionViewCell.swift */,
+				B555D7F8260C5DB100FA5060 /* PresetsCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -251,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				B5A4688A260A1BDF00A0D62D /* logo.png */,
+				B555D807260C804400FA5060 /* screenshot_5.png */,
 				B5A46892260A1D8500A0D62D /* screenshot_4.png */,
 				B5A4688B260A1BDF00A0D62D /* screenshot_1.png */,
 				B5A46887260A1BDE00A0D62D /* screenshot_2.png */,
@@ -319,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56AF0D625F297A4004D1B62 /* LaunchScreen.storyboard in Resources */,
+				B555D808260C804400FA5060 /* screenshot_5.png in Resources */,
 				B56AF10C25F29DFB004D1B62 /* Lato-Bold.ttf in Resources */,
 				B56AF10E25F29DFB004D1B62 /* Lato-Thin.ttf in Resources */,
 				B5A4688D260A1BDF00A0D62D /* screenshot_3.png in Resources */,
@@ -401,12 +417,16 @@
 				B56AF0F925F29CFD004D1B62 /* OnboardingVC.swift in Sources */,
 				B56313CB25FF97E6004FF718 /* CropVC.swift in Sources */,
 				B567199925F7706B003C84FA /* Filter.swift in Sources */,
+				B555D7F9260C5DB100FA5060 /* PresetsCollectionViewCell.swift in Sources */,
 				B55786E02603827E00A0B60E /* Crop.swift in Sources */,
+				B555D7F6260C576600FA5060 /* PresetsVC.swift in Sources */,
 				B56AF0CC25F297A0004D1B62 /* SceneDelegate.swift in Sources */,
 				B56AF0F025F29BE3004D1B62 /* PhotoLibraryVC.swift in Sources */,
 				B56AF11A25F2A0E8004D1B62 /* ImageEditHandler.swift in Sources */,
 				B5CEB36C25F4FBF200A522C1 /* EditsCollectionViewCell.swift in Sources */,
 				B55786DD2603807A00A0B60E /* CropCollectionViewCell.swift in Sources */,
+				B555D7FF260C69BF00FA5060 /* PresetsService.swift in Sources */,
+				B555D804260C6A5800FA5060 /* Presets.swift in Sources */,
 				B56AF0FF25F29D5B004D1B62 /* PHAsset+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

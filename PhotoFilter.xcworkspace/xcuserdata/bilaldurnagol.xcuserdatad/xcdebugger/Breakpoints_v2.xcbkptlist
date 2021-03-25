@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
             endingLineNumber = "92"
-            landmarkName = "cropImage(inputImage:inputImageView:cropRect:)"
+            landmarkName = "cropImage(inputImage:inputImageView:cropRect:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -226,7 +226,13 @@ class PhotoLibraryVC: UIViewController {
     //Clicked toolbar button actions
     @objc private func didTapToolbarButton(_ sender: UIButton) {
         if sender.tag == 1 {
-            
+            //go to presets page
+            let vc = PresetsVC()
+            guard let selectedAsset = selectedAsset else {return}
+            vc.selectedImage.onNext((selectedAsset.assetToImage()))
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
         }else if sender.tag == 2 {
             //go to edit page
             let vc = EditsVC()
@@ -236,7 +242,7 @@ class PhotoLibraryVC: UIViewController {
             vc.selectedImage.accept(value)
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
-            present(nav, animated: false)
+            present(nav, animated: true)
         }else if sender.tag == 3 {
             
         }else if sender.tag == 4 {
