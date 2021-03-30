@@ -24,7 +24,7 @@ class EditsVC: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -52,6 +52,7 @@ class EditsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         navBar()
         customCollectionView()
         view.addSubview(imageView)
@@ -78,7 +79,7 @@ class EditsVC: UIViewController {
                 vc.filter = model.name
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
-                strongSelf.present(nav ,animated: false)
+                strongSelf.present(nav ,animated: true)
             default:
                 let vc = FilterVC()
                 vc.selectedImage.onNext(strongSelf.imageView.image!)
@@ -119,7 +120,6 @@ class EditsVC: UIViewController {
     
     @objc private func didTapCancel() {
         //back to photo library
-        dismiss(animated: true, completion: nil)
     }
     
     @objc private func didTapSave() {

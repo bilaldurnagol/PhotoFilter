@@ -50,6 +50,7 @@ class PresetsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         navBar()
         view.addSubview(imageView)
         view.addSubview(titleLabel)

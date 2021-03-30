@@ -58,16 +58,18 @@ class CropVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         navBar()
+        bottomToolbar()
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         imageView.addSubview(cropShapeLayer)
         customCollectionView()
         
-                selectedImage.subscribe(onNext: {[weak self] image in
-                    self?.imageView.image = image
-                }).disposed(by: disposeBag)
-
+        selectedImage.subscribe(onNext: {[weak self] image in
+            self?.imageView.image = image
+        }).disposed(by: disposeBag)
+        
         cropMenu.bind(to: (collectionView?.rx
                             .items(cellIdentifier: CropCollectionViewCell.identifier, cellType: CropCollectionViewCell.self))!){ row, element, cell in
             cell.configure(icon: element.icon, title: element.title)
@@ -83,10 +85,11 @@ class CropVC: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        guard let toolbarHeight = navigationController?.toolbar.frame.size.height else {return}
         let viewTop: CGFloat = view.safeAreaInsets.top
         titleLabel.frame = CGRect(x: 0, y: viewTop, width: view.width, height: 70)
-        imageView.frame = CGRect(x: 0, y: viewTop, width: view.width, height: view.height - 60 - viewTop)
-        collectionView?.frame = CGRect(x: 0, y: imageView.bottom, width: view.width, height: 60)
+        imageView.frame = CGRect(x: 0, y: viewTop, width: view.width, height: view.height - 60 - viewTop - toolbarHeight)
+        collectionView?.frame = CGRect(x: 0, y: imageView.bottom, width: view.width, height: 55)
         cropShapeLayer.frame = imageView.bounds
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -114,6 +117,41 @@ class CropVC: UIViewController {
         view.addSubview(collectionView)
     }
     
+    // toolbar
+    private func bottomToolbar() {
+        var barButtonArray = [UIBarButtonItem]()
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        barButtonArray.append(spacer)
+        for i in 0..<3 {
+            if i == 1 {
+                barButtonArray.append(spacer)
+                let label = UILabel(frame: .zero)
+                label.text = "|"
+                label.textAlignment = .center
+                label.font = UIFont(name: "Lato-Light", size: 50)
+                barButtonArray.append(UIBarButtonItem(customView: label))
+                barButtonArray.append(spacer)
+            }else {
+                let button = UIButton(frame: .zero)
+                if i == 0 {
+                    button.setImage(UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 25, weight: .thin))), for: .normal)
+                    button.tag = 1
+                } else{
+                    button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 25, weight: .thin))), for: .normal)
+                    button.tag = 2
+                }
+                button.tintColor = .label
+                navigationController?.toolbar.barTintColor = UIColor.clear
+                button.addTarget(self, action: #selector(didTapToolbarButton(_:)), for: .touchUpInside)
+                barButtonArray.append(UIBarButtonItem(customView: button))
+            }
+        }
+        barButtonArray.append(spacer)
+        setToolbarItems(barButtonArray, animated: true)
+        navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
+    
     //MARK:- Objc Funcs
     
     @objc private func didTapCancel() {
@@ -122,19 +160,27 @@ class CropVC: UIViewController {
     }
     
     @objc private func didTapSave() {
-        ///crop image
-        guard let cropPoint = cropShapeLayer.shapeLayer.path?.boundingBoxOfPath,
-              let croppingImage = imageView.image else {return}
-        
-        FiltersService.shared.cropImage(inputImage: croppingImage, inputImageView: imageView, cropRect: cropPoint, completion: {croppedImage in
-            let vc = EditsVC()
-            var value = vc.selectedImage.value
-            value.append(croppedImage)
-            vc.selectedImage.accept(value)
-            let nav = UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: false)
-        })
+
+    }
+    
+    @objc private func didTapToolbarButton(_ sender: UIButton) {
+        if sender.tag == 1 {
+            ///crop image
+            guard let cropPoint = cropShapeLayer.shapeLayer.path?.boundingBoxOfPath,
+                  let croppingImage = imageView.image else {return}
+            
+            FiltersService.shared.cropImage(inputImage: croppingImage, inputImageView: imageView, cropRect: cropPoint, completion: {croppedImage in
+                let vc = EditsVC()
+                var value = vc.selectedImage.value
+                value.append(croppedImage)
+                vc.selectedImage.accept(value)
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
+            })
+        }else {
+     
+        }
     }
 }
 

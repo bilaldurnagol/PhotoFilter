@@ -23,7 +23,7 @@ class FilterVC: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -120,7 +120,7 @@ class FilterVC: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
     }
     
-    //delete toolbar
+    // toolbar
     private func bottomToolbar() {
         var barButtonArray = [UIBarButtonItem]()
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -163,17 +163,20 @@ class FilterVC: UIViewController {
     
     @objc private func didTapSave() {
         //save to filtered photo
-        
-        let vc = EditsVC()
-        var value = vc.selectedImage.value
-        value.append(imageView.image!)
-        vc.selectedImage.accept(value)
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: false)
     }
     
     @objc private func didTapToolbarButton(_ sender: UIButton) {
+        if sender.tag == 1 {
+            let vc = EditsVC()
+            var value = vc.selectedImage.value
+            value.append(imageView.image!)
+            vc.selectedImage.accept(value)
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        }else {
+     
+        }
     }
     
     @objc private func didTapRotateButton() {
