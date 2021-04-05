@@ -120,6 +120,10 @@ class EditsVC: UIViewController {
     
     @objc private func didTapCancel() {
         //back to photo library
+        let vc = PhotoLibraryVC()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     @objc private func didTapSave() {

@@ -119,7 +119,10 @@ class PresetsVC: UIViewController {
     
     @objc private func didTapCancel() {
         //back to photo library
-        dismiss(animated: true, completion: nil)
+        let vc = PhotoLibraryVC()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     @objc private func didTapSave() {

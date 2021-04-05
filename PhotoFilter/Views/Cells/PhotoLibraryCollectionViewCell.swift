@@ -40,8 +40,8 @@ class PhotoLibraryCollectionViewCell: UICollectionViewCell {
     
     func configure(with image: UIImage?) {
         guard let image = image else {return}
-        DispatchQueue.main.async {
-            self.imageView.image = image
+        DispatchQueue.main.async {[weak self] in
+            self?.imageView.image = image
         }
     }
 }

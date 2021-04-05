@@ -24,4 +24,24 @@ class ImageEditHandler {
             }
         })
     }
+    
+    func fetchAssets(completion: @escaping (PHFetchResult<PHAsset>) -> ()){
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.sortDescriptors = [
+            NSSortDescriptor(
+                key: "creationDate",
+                ascending: false)
+        ]
+        completion(PHAsset.fetchAssets(with: allPhotosOptions))
+    }
+    
+    func getPermissionIfNecessary(completion: @escaping (Bool) -> ()) {
+        guard PHPhotoLibrary.authorizationStatus() != .authorized else {
+            completion(true)
+            return
+        }
+        PHPhotoLibrary.requestAuthorization { status in
+            completion(status == .authorized)
+        }
+    }
 }

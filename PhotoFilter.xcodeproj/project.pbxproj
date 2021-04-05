@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		794355DF41D44B657054EE3B /* Pods_PhotoFilter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D5C708BBFDF0241F6CE1D6 /* Pods_PhotoFilter.framework */; };
+		B52F09E6261B5737003F1771 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F09E5261B5737003F1771 /* UIImageView+Extensions.swift */; };
 		B555D7F6260C576600FA5060 /* PresetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555D7F5260C576600FA5060 /* PresetsVC.swift */; };
 		B555D7F9260C5DB100FA5060 /* PresetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555D7F8260C5DB100FA5060 /* PresetsCollectionViewCell.swift */; };
 		B555D7FF260C69BF00FA5060 /* PresetsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555D7FE260C69BF00FA5060 /* PresetsService.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		083967FDFD8BC9960B07CBE3 /* Pods-PhotoFilter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoFilter.release.xcconfig"; path = "Target Support Files/Pods-PhotoFilter/Pods-PhotoFilter.release.xcconfig"; sourceTree = "<group>"; };
 		29D5C708BBFDF0241F6CE1D6 /* Pods_PhotoFilter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoFilter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52F09E5261B5737003F1771 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		B555D7F5260C576600FA5060 /* PresetsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsVC.swift; sourceTree = "<group>"; };
 		B555D7F8260C5DB100FA5060 /* PresetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsCollectionViewCell.swift; sourceTree = "<group>"; };
 		B555D7FE260C69BF00FA5060 /* PresetsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsService.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			children = (
 				B56AF0FB25F29D35004D1B62 /* UIView+Extensions.swift */,
 				B56AF0FE25F29D5B004D1B62 /* PHAsset+Extensions.swift */,
+				B52F09E5261B5737003F1771 /* UIImageView+Extensions.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				B5AEDD6225F62D3600FB4567 /* FilterVC.swift in Sources */,
 				B56AF0CA25F297A0004D1B62 /* AppDelegate.swift in Sources */,
 				B5CEB36925F4D50100A522C1 /* EditsVC.swift in Sources */,
+				B52F09E6261B5737003F1771 /* UIImageView+Extensions.swift in Sources */,
 				B56AF0F925F29CFD004D1B62 /* OnboardingVC.swift in Sources */,
 				B56313CB25FF97E6004FF718 /* CropVC.swift in Sources */,
 				B567199925F7706B003C84FA /* Filter.swift in Sources */,

@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Photos
+import PhotosUI
 
 class PhotoLibraryVC: UIViewController {
     
@@ -22,14 +23,16 @@ class PhotoLibraryVC: UIViewController {
         return layout
     }()
     
-    private let populatePhotos = StorageManager()
+    private var allPhotos = PHFetchResult<PHAsset>()
     private let disposeBag = DisposeBag()
     private var barButtons = [UIButton]()
     private var selectedAsset: PHAsset?
     
+    private let imageHandler = ImageEditHandler()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        PHPhotoLibrary.shared().register(self)
         UINavigationController().toolbar.setBackgroundImage(UIImage(),
                                                             forToolbarPosition: .any,
                                                             barMetrics: .default)
@@ -41,27 +44,17 @@ class PhotoLibraryVC: UIViewController {
         customCollectionView()
         cameraToolbar()
         
-        ImageEditHandler.shared.fetchPhotos(completion: {[weak self] image in
-            self?.populatePhotos.append(image)
+        imageHandler.getPermissionIfNecessary(completion: {[weak self]result in
+            if result {
+                self?.imageHandler.fetchAssets(completion: {assets in
+                    self?.allPhotos = assets
+                })
+            }
         })
-        
-        guard let collectionView = collectionView else {return}
-        populatePhotos
-            .items
-            .bind(to: collectionView
-                    .rx
-                    .items(cellIdentifier: PhotoLibraryCollectionViewCell.identifier,
-                           cellType: PhotoLibraryCollectionViewCell.self)) {row, element, cell in
-                cell.configure(with: element.assetToImage())
-            }.disposed(by: disposeBag)
-        
-        collectionView
-            .rx
-            .modelSelected(PHAsset.self)
-            .subscribe(onNext: {[weak self] asset in
-                self?.editToolbar()
-                self?.selectedAsset = asset
-            }).disposed(by: disposeBag)
+    }
+    
+    deinit {
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +77,8 @@ class PhotoLibraryVC: UIViewController {
         collectionView?.register(PhotoLibraryCollectionViewCell.self,
                                  forCellWithReuseIdentifier: PhotoLibraryCollectionViewCell.identifier) 
         guard let collectionView = collectionView else {return}
+        collectionView.delegate = self
+        collectionView.dataSource = self
         view.addSubview(collectionView)
     }
     //Custom bar button items
@@ -104,7 +99,6 @@ class PhotoLibraryVC: UIViewController {
         
     }
     
-    
     //add border in barbuttonitem
     private func styleButtons(tag: Int) {
         let tag = tag
@@ -118,12 +112,33 @@ class PhotoLibraryVC: UIViewController {
         }
     }
     
+    //setup alert
+    private func assetsAlert() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.view.tintColor = .white
+        alert.addAction(UIAlertAction(title: "Select More Photos", style: .default, handler: {_ in self.openAlbum()}))
+        alert.addAction(UIAlertAction(title: "Change Settings", style: .default, handler: {_ in self.openAppSetings()}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+        present(alert, animated: true)
+    }
+    
+    //MARK:- Alert Funcs
+    
     //go to app settings
-    private func goSettings() {
+    private func openAppSetings() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
+        }
+    }
+    
+    private func openAlbum() {
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        
+        if status == .limited {
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
         }
     }
     
@@ -219,7 +234,7 @@ class PhotoLibraryVC: UIViewController {
         }else if sender.tag == 2 {
             layout.itemSize = CGSize(width: view.width, height: view.height/3)
         }else {
-            goSettings()
+            assetsAlert()
         }
     }
     
@@ -261,7 +276,6 @@ class PhotoLibraryVC: UIViewController {
             let arrayToDelete = NSArray(object: selectedAsset!)
             
             PHPhotoLibrary.shared().performChanges( {PHAssetChangeRequest.deleteAssets(arrayToDelete)}, completionHandler: {[weak self] success, error in
-                self?.populatePhotos.removeFirst((self?.selectedAsset)!)
                 DispatchQueue.main.async {
                     self?.cameraToolbar()
                 }
@@ -272,6 +286,24 @@ class PhotoLibraryVC: UIViewController {
     }
 }
 
+extension PhotoLibraryVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return allPhotos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoLibraryCollectionViewCell.identifier, for: indexPath) as! PhotoLibraryCollectionViewCell
+        let asset = allPhotos[indexPath.row]
+        cell.configure(with: asset.assetToImage())
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        editToolbar()
+        selectedAsset = allPhotos[indexPath.row]
+    }
+}
+
 extension PhotoLibraryVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.originalImage] as? UIImage else {
@@ -279,12 +311,23 @@ extension PhotoLibraryVC: UIImagePickerControllerDelegate, UINavigationControlle
             return
         }
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        picker.dismiss(animated: true, completion: {
-            self.populatePhotos.removeAll()
-            self.viewDidLoad()
-        })
+        picker.dismiss(animated: true, completion: nil)
     }
 }
+
+extension PhotoLibraryVC: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        
+        guard let change = changeInstance.changeDetails(for: allPhotos) else {
+            return
+        }
+        DispatchQueue.main.sync {
+            allPhotos = change.fetchResultAfterChanges
+            collectionView?.reloadData()
+        }
+    }
+}
+
 
 //check user for onboarding
 class NewUser {
