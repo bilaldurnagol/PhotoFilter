@@ -58,8 +58,7 @@ class CropVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        navBar()
+
         bottomToolbar()
         view.addSubview(imageView)
         view.addSubview(titleLabel)
@@ -97,15 +96,7 @@ class CropVC: UIViewController {
         cropShapeLayer.image = imageView.image!
         cropShapeLayer.imageView = imageView
     }
-    
-    //navigation bar buttons
-    private func navBar() {
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel))
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didTapSave))
-        
-        navigationItem.leftBarButtonItem = cancelButton
-        navigationItem.rightBarButtonItem = saveButton
-    }
+
     
     private func customCollectionView() {
         // setup collection view
@@ -153,16 +144,7 @@ class CropVC: UIViewController {
     
     
     //MARK:- Objc Funcs
-    
-    @objc private func didTapCancel() {
-        //back to photo library
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc private func didTapSave() {
 
-    }
-    
     @objc private func didTapToolbarButton(_ sender: UIButton) {
         if sender.tag == 1 {
             ///crop image
@@ -179,7 +161,7 @@ class CropVC: UIViewController {
                 self.present(nav, animated: true)
             })
         }else {
-     
+            dismiss(animated: true, completion: nil)
         }
     }
 }

@@ -56,7 +56,6 @@ class FilterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navBar()
         bottomToolbar()
         view.addSubview(imageView)
         view.addSubview(titleLabel)
@@ -110,16 +109,6 @@ class FilterVC: UIViewController {
         controlSlider.minimumValue = filter.min
         controlSlider.maximumValue = filter.max
     }
-    
-    //navigation bar buttons
-    private func navBar() {
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel))
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didTapSave))
-        
-        navigationItem.leftBarButtonItem = cancelButton
-        navigationItem.rightBarButtonItem = saveButton
-    }
-    
     // toolbar
     private func bottomToolbar() {
         var barButtonArray = [UIBarButtonItem]()
@@ -156,15 +145,6 @@ class FilterVC: UIViewController {
     
     //MARK:- Objc Funcs
     
-    @objc private func didTapCancel() {
-        //back to photo library
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc private func didTapSave() {
-        //save to filtered photo
-    }
-    
     @objc private func didTapToolbarButton(_ sender: UIButton) {
         if sender.tag == 1 {
             let vc = EditsVC()
@@ -175,7 +155,7 @@ class FilterVC: UIViewController {
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true)
         }else {
-     
+            dismiss(animated: true, completion: nil)
         }
     }
     

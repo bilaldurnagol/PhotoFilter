@@ -128,6 +128,12 @@ class EditsVC: UIViewController {
     
     @objc private func didTapSave() {
         //save to filtered photo
-        print("save")
+        let vc = PhotoLibraryVC()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: {
+            //save editedImage
+            UIImageWriteToSavedPhotosAlbum(self.imageView.image!, nil, nil, nil)
+        })
     }
 }
